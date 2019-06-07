@@ -1,0 +1,80 @@
+CREATE TABLE users (
+    user_id SERIAL PRIMARY KEY,
+    name TEXT,
+    email TEXT
+);
+
+CREATE TABLE products (
+    product_id SERIAL PRIMARY KEY,
+    name TEXT,
+    price INTEGER
+);
+
+CREATE TABLE orders (
+    id SERIAL PRIMARY KEY,
+    product_id INTEGER REFERENCES products(product_id),
+    qty INTEGER
+);
+
+INSERT INTO users(name, email)
+VALUES 
+('Kanye West', 'kanyewest@gmail.com'),
+('virgil Abloh', 'Virgilabloh@gmail.com'),
+('Post Malone','Postmalone@gmail.com'); 
+
+INSERT INTO product (name, price)
+VALUES 
+('Off-White', 1000 ),
+('BMW M4', 90000 ),
+('AP', 300000git  ); 
+
+INSERT INTO orders (product_id)
+VALUES 
+(1),
+(2),
+(3); 
+
+
+SELECT * FROM product AS p
+JOIN orders AS o
+ON p.id = o.product_id 
+WHERE o.id = 1;
+  
+  
+
+SELECT * FROM product AS p
+JOIN orders AS o
+ON p.id = o.product_id 
+  
+
+SELECT sum(p.price) FROM orders AS o 
+JOIN product AS p 
+ON o.product_id = p.id;
+
+
+ALTER TABLE orders
+ADD column user_id INT 
+REFERENCES users(id)
+
+
+UPDATE orders 
+SET user_id = 1
+WHERE orders.id = 1
+
+UPDATE orders 
+SET user_id = 2
+WHERE orders.id = 2
+
+UPDATE orders 
+SET user_id = 3
+WHERE orders.id = 3
+
+SELECT * FROM users AS u
+JOIN orders AS o
+ON u.id = o.user_id 
+
+SELECT u.name, COUNT(o.id)
+FROM orders as o 
+JOIN users as u
+ON u.id = o.user_id 
+GROUP BY u.name

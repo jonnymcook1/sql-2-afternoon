@@ -1,0 +1,42 @@
+SELECT *
+FROM invoice AS i
+JOIN invoice_line AS il 
+ON il.invoice_id = i.invoice_id
+WHERE il.unit_price > 0.99;
+
+SELECT i.invoice_date, c.first_name, c.last_name, i.total
+FROM invoice AS i
+JOIN customer AS c 
+ON i.customer_id = c.customer_id;
+
+SELECT c.first_name, c.last_name, e.first_name, e.last_name
+FROM customer AS c
+JOIN employee AS e ON c.support_rep_id = e.employee_id;
+
+SELECT al.title, ar.name
+FROM album AS al
+JOIN artist AS ar 
+ON al.artist_id = ar.artist_id;
+
+SELECT pt.track_id
+FROM playlist_track AS pt
+JOIN playlist AS p 
+ON p.playlist_id = pt.playlist_id
+WHERE p.name = 'Music';
+
+SELECT t.name
+FROM track AS t 
+JOIN playlist_track AS pt 
+ON pt.track_id = t.track_id
+WHERE pt.playlist_id = 5;
+
+SELECT t.name, p.name
+FROM track AS t
+JOIN playlist_track AS pt ON t.track_id = pt.track_id
+JOIN playlist AS p ON pt.playlist_id = p.playlist_id;
+
+SELECT t.name, al.title
+FROM track AS t 
+JOIN album AS al ON t.album_id = al.album_id
+JOIN genre AS g ON g.genre_id = t.genre_id
+WHERe g.name = 'Alternative & Punk';
